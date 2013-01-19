@@ -1,26 +1,6 @@
-FarsiFonts|FarsiFonts.zip|http://www.farsiweb.ir/font/farsifonts-0.4.zip|"Full standard fonts from farsiweb.ir including Elham, Terafik, Terafik Bold, Titr, Roya, Roya Bold, Koodak, Nazli, Nazli Bold, and Homa"|
-BFonts|bfonts.zip|http://cyberrabbits.net/non/fonts/bfonts.zip|"Old school B Fonts, Originally published with Borna Rayaneh products in early 2000. Mirror them on my site."|
-IranianSans|irsans.zip|http://cyberrabbits.net/non/fonts/irsans.zip|"Iranian Sans, Mirror them on my site."|
-IranNastaliq|in.zip|http://cyberrabbits.net/non/fonts/irannastaliq.zip|"Iran nastaliq font"|
-XBZar|Zar.zip|http://irmug.org/Fonts/Zar.zip|"XB Zar from irmug"|
-XBNiloofar|Niloofar.zip|http://irmug.org/Fonts/Niloofar.zip|"XB Niloofar from irmug"|
-XBKhoramshahr|Khoramshahr.zip|http://irmug.org/Fonts/Khoramshahr.zip|"XB Khoramshahr from irmug"|
-XBKayhan|Kayhan.zip|http://irmug.org/Fonts/Kayhan.zip|"XB Kayhan from irmug"|
-XBYagut|Yagut.zip|http://irmug.org/Fonts/Yagut.zip|"XB Yagut from irmug"|
-XBRiyaz|Riyaz.zip|http://irmug.org/Fonts/Riyaz.zip|"XB Riyaz from irmug"|
-XBRoya|Roya.zip|http://irmug.org/Fonts/Roya.zip|"XB Roya from irmug"|
-XBShafigh|Shafigh.zip|http://irmug.org/Fonts/Shafigh.zip|"XB Shafigh from irmug"|
-XBShafigh-Kurd|Shafigh-Kurd.zip|http://irmug.org/Fonts/Shafigh%20Kurd.zip|"XB Shafigh (Kurd version) from irmug"|
-XBShafigh-Uzbek|Shafigh-Uzbek.zip|http://irmug.org/Fonts/Shafigh%20Uzbek.zip|"XB Shafigh (Uzbek version) from irmug"|
-XBShiraz|Shiraz.zip|http://irmug.org/Fonts/Shiraz.zip|"XB Shiraz from irmug"|
-XBSols|Sols.zip|http://irmug.org/Fonts/Sols.zip|"XB Sols from irmug"|
-XBTitre|Titre.zip|http://irmug.org/Fonts/Titre.zip|"XB Titre from irmug"|
-XBTabriz|Tabriz.zip|http://irmug.org/Fonts/Tabriz.zip|"XB Tabriz from irmug"|
-XBTraffic|Traffic.zip|http://irmug.org/Fonts/Traffic.zip|"XB Traffic from irmug"|
-XBVahid|Vahid.zip|http://irmug.org/Fonts/Vahid.zip|"XB Vahid from irmug"|
-XBVosta|Vosta.zip|http://irmug.org/Fonts/Vosta.zip|"XB Vosta from irmug"|
-XBYermook|Yermook.zip|http://irmug.org/Fonts/Yermook.zip|"XB Yermook from irmug"|
-XBYas|Yas.zip|http://irmug.org/Fonts/Yas.zip|"XB Yas from irmug"|
-XBZiba|Ziba.zip|http://irmug.org/Fonts/Ziba.zip|"XB Ziba from irmug"|
-XBFPF|FPF.zip|http://cyberrabbits.net/non/fonts/fpf-1.0.0-Beta-1.zip|"Free Persian Font, Originally from source forge, but I mirror this since sf is not available for Iran"|
+FarsiFonts|FarsiFonts.zip|http://fzerorubigd.github.com/persian-fonts-linux/farsifonts-0.4.zip|"Full standard fonts from farsiweb.ir(RIP) including Elham, Terafik, Terafik Bold, Titr, Roya, Roya Bold, Koodak, Nazli, Nazli Bold, and Homa"|
+BFonts|bfonts.zip|http://fzerorubigd.github.com/persian-fonts-linux/bfonts.zip|"Old school B Fonts, Originally published with Borna Rayaneh products in early 2000."|
+IranianSans|irsans.zip|http://fzerorubigd.github.com/persian-fonts-linux/irsans.zip|"Iranian Sans"|
+IranNastaliq|in.zip|http://fzerorubigd.github.com/persian-fonts-linux/irannastaliq.zip|"Iran nastaliq font"|
+FPF|FPF.zip|http://fzerorubigd.github.com/persian-fonts-linux/fpf-1.0.0-Beta-1.zip|"Free Persian Font, Originally from source forge."|
 Tahoma|Tahoma.zip|http://www.stchman.com/tools/MS_fonts/tahoma.zip|"MS Tahoma, just here to completet the set :) "|
