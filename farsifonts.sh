@@ -9,7 +9,7 @@
 
 
 # Address of toc file, I keep this file updated.
-readonly URL="http://cyberrabbits.net/non/list.txt"
+readonly URL="http://fzerorubigd.github.com/persian-fonts-linux/list.txt"
 readonly TOC="/tmp/list.txt"
 
 if [ $# -eq 0 ]; then

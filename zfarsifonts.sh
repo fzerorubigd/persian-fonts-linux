@@ -1,11 +1,9 @@
 #!/bin/bash
 # By fzerorubigd (http://cyberrabbits.net)
 # Install some Persian fonts (XB Series) and Tahoma on Linux
-#  
+#
 # if you do anything cool with it, let me know so I can publish or host it for you
 # contact me at fzerorubigd {ATSIGN} gmail {DOT} com
-
-
 
 function detect(){
   type -P $1  || { echo "Require $1 but not installed. Aborting." >&2; exit 1; }
@@ -17,13 +15,13 @@ function download() {
   mkfifo $pipe
   wget -c -O$2 $1 2>&1 | while read data;do
     if [ "`echo $data | grep '^Length:'`" ]; then
-      total_size=`echo $data | grep "^Length:" | sed 's/.*\((.*)\).*/\1/' |  tr -d '()'` 
+      total_size=`echo $data | grep "^Length:" | sed 's/.*\((.*)\).*/\1/' |  tr -d '()'`
     fi
-    if [ "`echo $data | grep '[0-9]*%' `" ];then 
-      percent=`echo $data | grep -o "[0-9]*%" | tr -d '%'` 
-      current=`echo $data | grep "[0-9]*%" | sed 's/\([0-9BKMG.]\+\).*/\1/' ` 
-      speed=`echo $data | grep "[0-9]*%" | sed 's/.*\(% [0-9BKMG.]\+\).*/\1/' | tr -d ' %'` 
-      remain=`echo $data | grep -o "[0-9A-Za-z]*$" ` 
+    if [ "`echo $data | grep '[0-9]*%' `" ];then
+      percent=`echo $data | grep -o "[0-9]*%" | tr -d '%'`
+      current=`echo $data | grep "[0-9]*%" | sed 's/\([0-9BKMG.]\+\).*/\1/' `
+      speed=`echo $data | grep "[0-9]*%" | sed 's/.*\(% [0-9BKMG.]\+\).*/\1/' | tr -d ' %'`
+      remain=`echo $data | grep -o "[0-9A-Za-z]*$" `
       echo $percent
       echo "#Downloading $3...\n$current of $total_size ($percent%)\nSpeed : $speed/Sec\nEstimated time : $remain"
     fi
@@ -50,7 +48,7 @@ detect zenity
 detect gksu
 
 # Address of toc file, I keep this file updated.
-readonly URL="http://cyberrabbits.net/non/list.txt"
+readonly URL="http://fzerorubigd.github.com/persian-fonts-linux/list.txt"
 readonly TOC="/tmp/list.txt"
 readonly LIST="/tmp/ids"
 cd ~
@@ -67,8 +65,8 @@ IFS=$'\n'
 for nme in $(cat $TOC )
 do
   I=$(( $I + 1 ))
-  fonts[$I]=`echo $nme | cut -d'|' -f1` 
-  filename[$I]=`echo $nme | cut -d'|' -f2` 
+  fonts[$I]=`echo $nme | cut -d'|' -f1`
+  filename[$I]=`echo $nme | cut -d'|' -f2`
   urls[$I]=`echo $nme | cut -d'|' -f3`
   desc[$I]=`echo $nme | cut -d'|' -f4`
 done
@@ -91,14 +89,12 @@ if [ -s $LIST ]; then
   rand="$RANDOM `date`"
   pipe="/tmp/pipe.`echo '$rand' | md5sum | tr -d ' -'`"
   mkfifo $pipe
-  gksu "fc-cache -f -v >$pipe" & 
+  gksu "fc-cache -f -v >$pipe" &
   cat $pipe |  while read data;do
 	echo "#$data"
-  done |  zenity --progress --pulsate --title="Refresh font cache" --text="Refresh font cache, please wait..." --auto-close --width="350" 
+  done |  zenity --progress --pulsate --title="Refresh font cache" --text="Refresh font cache, please wait..." --auto-close --width="350"
   rm -f $pipe
 fi
 
 rm -f $TOC
 rm -f $LIST
-
-
