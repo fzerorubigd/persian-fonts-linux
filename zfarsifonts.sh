@@ -48,7 +48,7 @@ detect zenity
 detect gksu
 
 # Address of toc file, I keep this file updated.
-readonly URL="http://fzerorubigd.github.com/persian-fonts-linux/list.txt"
+readonly URL="http://fzerorubigd.github.com/persian-fonts-linux/list"
 readonly TOC="/tmp/list.txt"
 readonly LIST="/tmp/ids"
 cd ~
