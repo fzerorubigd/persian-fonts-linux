@@ -7,6 +7,9 @@
 # You can use "axel" instead of default "wget", just install axel first and call this
 # with axel parameter.
 
+function detect(){
+  type -P $1  || { echo "Require $1 but not installed. Aborting." >&2; exit 1; }
+}
 
 # Address of toc file, I keep this file updated.
 readonly URL="http://fzerorubigd.github.com/persian-fonts-linux/list"
@@ -29,6 +32,11 @@ else
 	echo "defualt is wget"
 	exit
 fi
+
+detect $DOWNLOADER
+detect unzip
+detect sudo
+
 echo "Using $DOWNLOADER as downloader"
 cd ~
 rm -f $TOC
@@ -78,7 +86,7 @@ function mainmenu(){
 				$DOWNLOADER $PARAMETER  ${urls[i]} $OUTPARAM ${filename[i]}
 				DL=$(( $DL + 1 ))
 				downloaded[$DL]=${filename[i]}
-				sudo mkdir /usr/share/fonts/truetype/${fonts[i]}
+				sudo mkdir -p /usr/share/fonts/truetype/${fonts[i]}
 				sudo unzip -o -d /usr/share/fonts/truetype/${fonts[i]} ~/${filename[i]}
 			done
 		return 0
