@@ -38,8 +38,12 @@ function download() {
 }
 
 function installFont(){
-  gksu "mkdir -p /usr/share/fonts/truetype/$1"
-  gksu "unzip -o -d /usr/share/fonts/truetype/$1 ./$2"
+  if [ ${filename[LAST_REPLY]: -4} == ".zip" ]; then
+    gksu "mkdir -p /usr/share/fonts/truetype/$1"
+    gksu "unzip -o -d /usr/share/fonts/truetype/$1 ./$2"
+  elif [ ${filename[LAST_REPLY]: -4} == ".ttf" ]; then
+    gksu "cp ./$2 /usr/share/fonts/truetype/"
+  fi
 }
 
 #

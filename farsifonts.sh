@@ -86,8 +86,12 @@ function mainmenu(){
 				$DOWNLOADER $PARAMETER  ${urls[i]} $OUTPARAM ${filename[i]}
 				DL=$(( $DL + 1 ))
 				downloaded[$DL]=${filename[i]}
-				sudo mkdir -p /usr/share/fonts/truetype/${fonts[i]}
-				sudo unzip -o -d /usr/share/fonts/truetype/${fonts[i]} ~/${filename[i]}
+                                if [ ${filename[i]: -4} == ".zip" ]; then
+                                    sudo mkdir -p /usr/share/fonts/truetype/${fonts[i]}
+                                    sudo unzip -o -d /usr/share/fonts/truetype/${fonts[i]} ~/${filename[i]}
+                                elif [ ${filename[i]: -4} == ".ttf" ]; then
+                                    sudo cp ~/${filename[i]} /usr/share/fonts/truetype/
+                                fi
 			done
 		return 0
 		break
@@ -104,8 +108,12 @@ function mainmenu(){
 					$DOWNLOADER $PARAMETER ${urls[LAST_REPLY]} $OUTPARAM ${filename[LAST_REPLY]}
 					DL=$(( $DL + 1 ))
 					downloaded[$DL]=${filename[LAST_REPLY]}
-					sudo mkdir -p /usr/share/fonts/truetype/$fnt
-					sudo unzip -o -d /usr/share/fonts/truetype/$fnt ~/${filename[LAST_REPLY]}
+                                        if [ ${filename[LAST_REPLY]: -4} == ".zip" ]; then
+                                            sudo mkdir -p /usr/share/fonts/truetype/$fnt
+                                            sudo unzip -o -d /usr/share/fonts/truetype/$fnt ~/${filename[LAST_REPLY]}
+                                        elif [ ${filename[LAST_REPLY]: -4} == ".ttf" ]; then
+                                            sudo cp ~/${filename[LAST_REPLY]} /usr/share/fonts/truetype/
+                                        fi
 					return 1
 					break
 		  		;;
