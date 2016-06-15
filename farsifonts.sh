@@ -12,7 +12,7 @@ function detect(){
 }
 
 # Address of toc file, I keep this file updated.
-readonly URL="http://ubuntu-ir/persian-fonts-linux/list"
+readonly URL="http://fzerorubigd.github.com/persian-fonts-linux/list"
 readonly TOC="/tmp/list.txt"
 
 if [ $# -eq 0 ]; then
@@ -86,10 +86,10 @@ function mainmenu(){
 				$DOWNLOADER $PARAMETER  ${urls[i]} $OUTPARAM ${filename[i]}
 				DL=$(( $DL + 1 ))
 				downloaded[$DL]=${filename[i]}
-                                if [ ${file: -4} == ".zip" ]; then
+                                if [ ${filename[i]: -4} == ".zip" ]; then
                                     sudo mkdir -p /usr/share/fonts/truetype/${fonts[i]}
                                     sudo unzip -o -d /usr/share/fonts/truetype/${fonts[i]} ~/${filename[i]}
-                                elif [ ${file: -4} == ".ttf" ]; then
+                                elif [ ${filename[i]: -4} == ".ttf" ]; then
                                     sudo cp ~/${filename[i]} /usr/share/fonts/truetype/
                                 fi
 			done
@@ -108,10 +108,10 @@ function mainmenu(){
 					$DOWNLOADER $PARAMETER ${urls[LAST_REPLY]} $OUTPARAM ${filename[LAST_REPLY]}
 					DL=$(( $DL + 1 ))
 					downloaded[$DL]=${filename[LAST_REPLY]}
-                                        if [ ${file: -4} == ".zip" ]; then
+                                        if [ ${filename[LAST_REPLY]: -4} == ".zip" ]; then
                                             sudo mkdir -p /usr/share/fonts/truetype/$fnt
                                             sudo unzip -o -d /usr/share/fonts/truetype/$fnt ~/${filename[LAST_REPLY]}
-                                        elif [ ${file: -4} == ".ttf" ]; then
+                                        elif [ ${filename[LAST_REPLY]: -4} == ".ttf" ]; then
                                             sudo cp ~/${filename[LAST_REPLY]} /usr/share/fonts/truetype/
                                         fi
 					return 1
