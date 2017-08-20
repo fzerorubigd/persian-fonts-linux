@@ -7,8 +7,9 @@
 # You can use "axel" instead of default "wget", just install axel first and call this
 # with axel parameter.
 
+FONT_PATH="/home/$USER/.fonts/truetype/"
 function detect(){
-  type -P $1  || { echo "Require $1 but not installed. Aborting." >&2; exit 1; }
+  type -P $1 >/dev/null  || { echo "Require $1 but not installed. Aborting." >&2; exit 1; }
 }
 
 # Address of toc file, I keep this file updated.
@@ -40,7 +41,8 @@ detect sudo
 echo "Using $DOWNLOADER as downloader"
 cd ~
 rm -f $TOC
-$DOWNLOADER $PARAMETER $URL $OUTPARAM $TOC
+echo "Downloading font list file..."
+$DOWNLOADER $PARAMETER $URL $OUTPARAM $TOC 2>/dev/null
 I=0
 DL=0
 declare -a downloaded
@@ -70,7 +72,8 @@ fonts[$I]=$QUIT
 
 function mainmenu(){
 	PS3="Your choice ($I for quit): "
-	echo "Choose font to install or choose Quit"
+        echo "* All fonts are going to be install in '.fonts' directory in your home."
+	echo "Choose which fonts should be install or choose to quit"
 	select fnt in ${fonts[*]};
 	do
 	  case $fnt in
@@ -80,14 +83,15 @@ function mainmenu(){
 		  ;;
 		"$ALL")
 
-		echo "All fonts are going to be downloaded..."
+		echo "All fonts are going to be download..."
 			for i in `seq ${#filename[@]}`
 			do
-				$DOWNLOADER $PARAMETER  ${urls[i]} $OUTPARAM ${filename[i]}
+                                echo "Downloading font ${filename[i]}..."
+				$DOWNLOADER $PARAMETER  ${urls[i]} $OUTPARAM ${filename[i]}  2>/dev/null
 				DL=$(( $DL + 1 ))
 				downloaded[$DL]=${filename[i]}
-				sudo mkdir -p /usr/share/fonts/truetype/${fonts[i]}
-				sudo unzip -o -d /usr/share/fonts/truetype/${fonts[i]} ~/${filename[i]}
+				mkdir -p $FONT_PATH${fonts[i]}
+				unzip -o -d $FONT_PATH${fonts[i]} ~/${filename[i]} 1>/dev/null
 			done
 		return 0
 		break
@@ -101,11 +105,13 @@ function mainmenu(){
 		do
 			case $ans in
 				"yes")
-					$DOWNLOADER $PARAMETER ${urls[LAST_REPLY]} $OUTPARAM ${filename[LAST_REPLY]}
+                                        echo "Downloading font ${filename[LAST_REPLY]}..."
+					$DOWNLOADER $PARAMETER ${urls[LAST_REPLY]} $OUTPARAM ${filename[LAST_REPLY]} 2>/dev/null
 					DL=$(( $DL + 1 ))
 					downloaded[$DL]=${filename[LAST_REPLY]}
-					sudo mkdir -p /usr/share/fonts/truetype/$fnt
-					sudo unzip -o -d /usr/share/fonts/truetype/$fnt ~/${filename[LAST_REPLY]}
+                                        mkdir -p $FONT_PATH$fnt
+                                        unzip -o -d $FONT_PATH$fnt ~/${filename[LAST_REPLY]} 1>/dev/null
+                                        echo "Font ${filename[LAST_REPLY]} has been installed"
 					return 1
 					break
 		  		;;
@@ -122,14 +128,15 @@ function mainmenu(){
 function postaction(){
 	clear
 	if [ $DL -gt 0 ]; then
-		echo "Delete downloaded files?"
-		echo "IF YOU CHOOSE YES, ALL DOWNLOADED FILES IN YOUR HOME FOLDER WILL BE DELETED!!!"
-		PS3="Your answer : "
+		echo "Do you want to detele all fonts' archive files?"
+		echo "If you choose yes, all downloaded files in your home folder will be deleted!!!"
+		PS3="Your answer: "
 
 		select ans in yes no;
 		do
 			case $ans in
 				"yes")
+                                        echo "Removing all font archive files..." 
 					for i in `seq $DL`
 					do
 						rm -f ${downloaded[i]}
@@ -141,9 +148,9 @@ function postaction(){
 				;;
 			esac
 		done
-		echo "Refresh font cache"
-		sudo fc-cache -f -v >/dev/null
-		echo "All done."
+		echo "Updating font cache..."
+		fc-cache -f -v $FONT_PATH >/dev/null
+		echo "Done!"
 	fi
 	rm -f $TOC
 }
@@ -161,3 +168,4 @@ do
 done
 
 postaction
+export IFS=$OLD_IFS
