@@ -10,7 +10,7 @@ There is two version available :
 
 See http://fzerorubigd.github.com/persian-fonts-linux
 
-# Available fonts
+## Available fonts
 
 1) Vazir
 2) FarsiFonts
