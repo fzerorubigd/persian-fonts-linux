@@ -10,6 +10,14 @@ There is two version available :
 
 See http://fzerorubigd.github.com/persian-fonts-linux
 
+## Installation 
+
+Also you can run the script directly from your shell (it's wise to check the script before running the command) :
+
+```shell
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/fzerorubigd/persian-fonts-linux/master/farsifonts.sh)"
+```
+
 ## Available fonts
 
 1) Vazir
