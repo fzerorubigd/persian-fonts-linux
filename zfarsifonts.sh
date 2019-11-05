@@ -38,14 +38,14 @@ function download() {
 }
 
 function installFont(){
-  gksu "mkdir -p /usr/share/fonts/truetype/$1"
-  gksu "unzip -o -d /usr/share/fonts/truetype/$1 ./$2"
+  pkexec "mkdir -p /usr/share/fonts/truetype/$1"
+  pkexec "unzip -o -d /usr/share/fonts/truetype/$1 ./$2"
 }
 
 #
 detect wget
 detect zenity
-detect gksu
+detect pkexec
 
 # Address of toc file, I keep this file updated.
 readonly URL="http://fzerorubigd.github.com/persian-fonts-linux/list"
@@ -89,7 +89,7 @@ if [ -s $LIST ]; then
   rand="$RANDOM `date`"
   pipe="/tmp/pipe.`echo '$rand' | md5sum | tr -d ' -'`"
   mkfifo $pipe
-  gksu "fc-cache -f -v >$pipe" &
+  pkexec "fc-cache -f -v >$pipe" &
   cat $pipe |  while read data;do
 	echo "#$data"
   done |  zenity --progress --pulsate --title="Refresh font cache" --text="Refresh font cache, please wait..." --auto-close --width="350"
