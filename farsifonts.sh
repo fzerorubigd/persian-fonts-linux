@@ -7,7 +7,7 @@
 # You can use "axel" instead of default "wget", just install axel first and call this
 # with axel parameter.
 
-FONT_PATH="/home/$USER/.fonts/truetype/"
+FONT_PATH="$HOME/.fonts/truetype/"
 function detect(){
   type -P $1 >/dev/null  || { echo "Require $1 but not installed. Aborting." >&2; exit 1; }
 }
