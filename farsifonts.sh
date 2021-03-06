@@ -154,9 +154,16 @@ function postaction(){
 				;;
 			esac
 		done
-		echo "Updating font cache..."
-		fc-cache -f -v $FONT_PATH >/dev/null
-		echo "Done!"
+
+		if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+			echo "Updating font cache..."
+			fc-cache -f -v $FONT_PATH >/dev/null
+			echo "Done!"
+		elif [[ "$OSTYPE" == "darwin"* ]]; then
+			echo "Installing fonts..."
+			find ~/.fonts -name '*.ttf' -exec cp '{}' /Library/Fonts \;
+			echo "Done!"
+		fi
 	fi
 	rm -f $TOC
 }
