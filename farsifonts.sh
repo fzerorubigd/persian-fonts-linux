@@ -7,7 +7,7 @@
 # You can use "axel" instead of default "wget", just install axel first and call this
 # with axel parameter.
 
-FONT_PATH="/home/$USER/.fonts/truetype/"
+FONT_PATH="$HOME/.fonts/truetype/"
 function detect(){
   type -P $1 >/dev/null  || { echo "Require $1 but not installed. Aborting." >&2; exit 1; }
 }
@@ -91,7 +91,13 @@ function mainmenu(){
 				DL=$(( $DL + 1 ))
 				downloaded[$DL]=${filename[i]}
 				mkdir -p $FONT_PATH${fonts[i]}
-				unzip -o -d $FONT_PATH${fonts[i]} ~/${filename[i]} 1>/dev/null
+				if [[ ${filename[i]} =~ ^.*\.zip$ ]]; then
+					unzip -o -d $FONT_PATH${fonts[i]} ~/${filename[i]} 1>/dev/null
+				elif [[ ${filename[i]} =~ ^.*\.ttf$ ]]; then
+					cp ~/${filename[i]} $FONT_PATH${fonts[i]}
+				else
+					echo "Can't process $HOME/${filename[i]}"
+				fi
 			done
 		return 0
 		break
@@ -148,9 +154,16 @@ function postaction(){
 				;;
 			esac
 		done
-		echo "Updating font cache..."
-		fc-cache -f -v $FONT_PATH >/dev/null
-		echo "Done!"
+
+		if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+			echo "Updating font cache..."
+			fc-cache -f -v $FONT_PATH >/dev/null
+			echo "Done!"
+		elif [[ "$OSTYPE" == "darwin"* ]]; then
+			echo "Installing fonts..."
+			find ~/.fonts -name '*.ttf' -exec cp '{}' /Library/Fonts \;
+			echo "Done!"
+		fi
 	fi
 	rm -f $TOC
 }
