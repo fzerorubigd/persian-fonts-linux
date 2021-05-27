@@ -13,7 +13,7 @@ function detect(){
 }
 
 # Address of toc file, I keep this file updated.
-readonly URL="http://fzerorubigd.github.com/persian-fonts-linux/list"
+readonly URL="https://raw.githubusercontent.com/fzerorubigd/persian-fonts-linux/gh-pages/list"
 readonly TOC="/tmp/list.txt"
 
 if [ $# -eq 0 ]; then
