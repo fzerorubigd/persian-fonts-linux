@@ -7,7 +7,7 @@
 # You can use "axel" instead of default "wget", just install axel first and call this
 # with axel parameter.
 
-FONT_PATH="$HOME/.fonts/"
+FONT_PATH="$HOME/.fonts/truetype/"
 # Address of toc file, I keep this file updated.
 readonly URL="http://fzero.rubi.gd/persian-fonts-linux/list"
 readonly TOC="/tmp/list.txt"
