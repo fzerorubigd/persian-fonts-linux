@@ -8,24 +8,20 @@
 # with axel parameter.
 
 FONT_PATH="$HOME/.fonts/truetype/"
-function detect(){
-  type -P $1 >/dev/null  || { echo "Require $1 but not installed. Aborting." >&2; exit 1; }
-}
-
 # Address of toc file, I keep this file updated.
 readonly URL="http://fzero.rubi.gd/persian-fonts-linux/list"
 readonly TOC="/tmp/list.txt"
 
-if [ $# -eq 0 ]; then
-	DOWNLOADER=wget
-	PARAMETER="-c"
-	OUTPARAM="-O"
-elif [ $1 == "wget" ]; then
-	DOWNLOADER=$1
+function detect(){
+	type -P $1 >/dev/null  || { echo "Require $1 but not installed. Aborting." >&2; exit 1; }
+}
+
+if [ $# == 0 ] || [ $1 == "wget" ]; then
+	DOWNLOADER="wget"
 	PARAMETER="-c"
 	OUTPARAM="-O"
 elif [ $1 == "axel" ]; then
-	DOWNLOADER=$1
+	DOWNLOADER="axel"
 	PARAMETER="-n 10 -a"
 	OUTPARAM="-o"
 else
@@ -54,11 +50,11 @@ OLD_IFS=$IFS
 IFS=$'\n'
 for nme in $(cat $TOC )
 do
-  I=$(( $I + 1 ))
-  fonts[$I]=`echo $nme | cut -d'|' -f1`
-  filename[$I]=`echo $nme | cut -d'|' -f2`
-  urls[$I]=`echo $nme | cut -d'|' -f3`
-  desc[$I]=`echo $nme | cut -d'|' -f4`
+	I=$(( $I + 1 ))
+	fonts[$I]=`echo $nme | cut -d'|' -f1`
+	filename[$I]=`echo $nme | cut -d'|' -f2`
+	urls[$I]=`echo $nme | cut -d'|' -f3`
+	desc[$I]=`echo $nme | cut -d'|' -f4`
 done
 IFS=$OLD_IFS
 
@@ -72,21 +68,21 @@ fonts[$I]=$QUIT
 
 function mainmenu(){
 	PS3="Your choice ($I for quit): "
-        echo "* All fonts are going to be install in '.fonts' directory in your home."
+	echo "* All fonts are going to be install in '.fonts' directory in your home."
 	echo "Choose which fonts should be install or choose to quit"
 	select fnt in ${fonts[*]};
 	do
-	  case $fnt in
+	case $fnt in
 		"$QUIT")
-		return 0
-		  break
-		  ;;
+			return 0
+			break
+		;;
 		"$ALL")
 
 		echo "All fonts are going to be download..."
 			for i in `seq ${#filename[@]}`
 			do
-                                echo "Downloading font ${filename[i]}..."
+				echo "Downloading font ${filename[i]}..."
 				$DOWNLOADER $PARAMETER  ${urls[i]} $OUTPARAM ${filename[i]}  2>/dev/null
 				DL=$(( $DL + 1 ))
 				downloaded[$DL]=${filename[i]}
@@ -99,35 +95,35 @@ function mainmenu(){
 					echo "Can't process $HOME/${filename[i]}"
 				fi
 			done
-		return 0
-		break
-		  ;;
-		*)
-		LAST_REPLY=$REPLY
-		echo ${desc[LAST_REPLY]}
-		echo "Download and install??"
-		PS3="Your choice : "
-		select ans in yes no;
-		do
-			case $ans in
-				"yes")
-                                        echo "Downloading font ${filename[LAST_REPLY]}..."
-					$DOWNLOADER $PARAMETER ${urls[LAST_REPLY]} $OUTPARAM ${filename[LAST_REPLY]} 2>/dev/null
-					DL=$(( $DL + 1 ))
-					downloaded[$DL]=${filename[LAST_REPLY]}
-                                        mkdir -p $FONT_PATH$fnt
-                                        unzip -o -d $FONT_PATH$fnt ~/${filename[LAST_REPLY]} 1>/dev/null
-                                        echo "Font ${filename[LAST_REPLY]} has been installed"
-					return 1
-					break
-		  		;;
-				"no")
-					return 1
-					break
-			esac
-		done
+			return 0
+			break
 		;;
-	  esac
+		*)
+			LAST_REPLY=$REPLY
+			echo ${desc[LAST_REPLY]}
+			echo "Download and install??"
+			PS3="Your choice : "
+			select ans in yes no;
+			do
+				case $ans in
+					"yes")
+						echo "Downloading font ${filename[LAST_REPLY]}..."
+						$DOWNLOADER $PARAMETER ${urls[LAST_REPLY]} $OUTPARAM ${filename[LAST_REPLY]} 2>/dev/null
+						DL=$(( $DL + 1 ))
+						downloaded[$DL]=${filename[LAST_REPLY]}
+						mkdir -p $FONT_PATH$fnt
+						unzip -o -d $FONT_PATH$fnt ~/${filename[LAST_REPLY]} 1>/dev/null
+						echo "Font ${filename[LAST_REPLY]} has been installed"
+						return 1
+						break
+					;;
+					"no")
+						return 1
+						break
+				esac
+			done
+		;;
+	esac
 	done
 }
 
@@ -142,15 +138,15 @@ function postaction(){
 		do
 			case $ans in
 				"yes")
-                                        echo "Removing all font archive files..." 
+					echo "Removing all font archive files..." 
 					for i in `seq $DL`
 					do
 						rm -f ${downloaded[i]}
 					done
-				break
+					break
 				;;
 				"no")
-				break
+					break
 				;;
 			esac
 		done
