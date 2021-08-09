@@ -1,5 +1,5 @@
 #!/bin/bash
-# By fzerorubigd (http://cyberrabbits.net)
+# By fzerorubigd (http://cyberrabbits.net) & 733amir
 # Install some Persian fonts (XB Series) and Tahoma on Linux
 #
 # if you do anything cool with it, let me know so I can publish or host it for you
@@ -13,7 +13,7 @@ function detect(){
 }
 
 # Address of toc file, I keep this file updated.
-readonly URL="http://fzerorubigd.github.io/persian-fonts-linux/list"
+readonly URL="http://733amir.github.io/persian-fonts-linux/list"
 readonly TOC="/tmp/list.txt"
 
 if [ $# -eq 0 ]; then

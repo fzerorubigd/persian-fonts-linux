@@ -8,14 +8,14 @@ There is two version available :
    - farsifont.sh : simple cli version
    - zfarsifont.sh : GUI version (require zenity)
 
-See http://fzerorubigd.github.io/persian-fonts-linux
+See http://733amir.github.io/persian-fonts-linux
 
 ## Installation 
 
 Also you can run the script directly from your shell (it's wise to check the script before running the command) :
 
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/fzerorubigd/persian-fonts-linux/master/farsifonts.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/733amir/persian-fonts-linux/master/farsifonts.sh)"
 ```
 
 ## Available fonts
