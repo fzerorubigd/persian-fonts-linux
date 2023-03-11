@@ -8,7 +8,7 @@ There is two version available :
    - farsifont.sh : simple cli version
    - zfarsifont.sh : GUI version (require zenity)
 
-See http://fzerorubigd.github.com/persian-fonts-linux
+See http://fzerorubigd.github.io/persian-fonts-linux
 
 ## Installation 
 
